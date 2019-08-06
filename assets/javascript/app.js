@@ -15,16 +15,17 @@ $(document).ready(function() {
 
     //Adding new button of choice
     $("#add-button").on("click", function () {
-		var newAthlete = $("#user-input").val().trim();
+        var newAthlete = $("#user-input").val().trim();
 		athletes.push(newAthlete);
-		renderButtons();
+		makeButtons();
 		return;
 	});
 
-    //Getting the GIFs
+    //Getting the GIFs (Not working. I know I'm so close but can't quite get it to work..)
     $("button").on("click", function() {
-        var athlete = $(this).attr("data-name");
+        var athlete = "Kobe Bryant"; // $(this).attr(athletes[0]);
         var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + athlete + "&api_key=hPaTztoPkkaBjeBEGIeN08HdiEBxkBYp&limit=10";
+        console.log(queryURL)
 
     $.ajax({
         URL: queryURL,
@@ -38,13 +39,14 @@ $(document).ready(function() {
 
     var athleteDiv = $("<div>");
     var athleteImg = $("<img>");
-    $("#superstars").append(athleteDiv);
-        athleteImg.attr("src", results[i].images.original_still.url);
-			athleteImg.attr("data-still", results[i].images.original_still.url);
-			athleteImg.attr("data-animate", results[i].images.original.url);
+    $("#superstars").prepend(athleteDiv);
+        athleteImg.attr("src", results[i].images.fixed_still.url);
+			athleteImg.attr("data-still", results[i].images.fixed_still.url);
+			athleteImg.attr("data-animate", results[i].images.fixed.url);
 			athleteImg.attr("data-state", "still");
 			athleteImg.attr("class", "gif");
-			athleteDiv.append(athleteImg);
+            athleteDiv.append(athleteImg);
+            
 			}
 		});
     });
